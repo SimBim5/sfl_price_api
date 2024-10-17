@@ -25,8 +25,8 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git config --global simon.faltz 'github-actions'
-          git config --global simon.faltz@web.de 'github-actions@github.com'
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
           git add price_tracking/*.csv
           git commit -m "Update price data"
           git push
