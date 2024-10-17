@@ -25,5 +25,5 @@ jobs:
           pip install pandas requests
 
       # Run the Python script
-      - name: Run Python script
-        run: python your_script.py
+      - name: Run price_api.py
+        run: python price_api.py
