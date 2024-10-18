@@ -1,4 +1,4 @@
-name: Run Python Script and Jupyter Notebook Every 15 Minutes
+name: Run Python Scripts Every 15 Minutes
 
 on:
   schedule:
@@ -18,15 +18,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas requests nbconvert
+          pip install pandas requests seaborn matplotlib pillow colorthief
 
-      - name: Run Python script
+      - name: Run Python API script
         run: python price_api.py
 
-      - name: Convert and run Jupyter notebook
-        run: |
-          jupyter nbconvert --to script price_plotter.ipynb
-          python price_plotter.py
+      - name: Run price plotting script
+        run: python price_plotter.py
 
       - name: Commit and push changes
         env:
@@ -34,6 +32,6 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git add price_tracking/*.csv
-          git commit -m "Update price data"
+          git add price_tracking/*.csv price_plots/*.png
+          git commit -m "Update price data and plots"
           git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
