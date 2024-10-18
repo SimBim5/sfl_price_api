@@ -1,9 +1,17 @@
+name: Run Python Scripts Every 15 Minutes
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"  # Runs every 15 minutes
+  workflow_dispatch:  # Allows manual trigger
+
 jobs:
   run-scripts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
+      # Install Consolas font
       - name: Install Consolas font
         run: |
           sudo apt-get update
@@ -19,3 +27,19 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pandas requests seaborn matplotlib pillow colorthief
+
+      - name: Run Python API script
+        run: python price_api.py
+
+      - name: Run price plotting script
+        run: python price_plotter.py
+
+      - name: Commit and push changes
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add price_tracking/*.csv price_plots/*.png
+          git commit -m "Update price data and plots"
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
