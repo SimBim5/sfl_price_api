@@ -101,8 +101,8 @@ def plot_each_resource_separately():
         resource_data = df[df['Resource'] == resource]
         
         # Path to the corresponding image
-        image_path = f'assets/{resource}.png'  # Ensure image names match resource names
-        
+        image_path = f'assets/{resource.lower()}.png'
+
         # Get the dominant color from the image
         dominant_color = get_dominant_color(image_path)
         
