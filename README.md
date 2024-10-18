@@ -51,7 +51,7 @@
 
 # MINERALS 🪨🪨🪨
 
-![Tree Price](price_plots/tree_price_plot.png)
+![Wood Price](price_plots/wood_price_plot.png)
 
 ![Stone Price](price_plots/stone_price_plot.png)
 
