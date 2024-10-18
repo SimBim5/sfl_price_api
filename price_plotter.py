@@ -19,7 +19,7 @@ df['Date'] = pd.to_datetime(df['Date'])
 sns.set(style='darkgrid')
 
 # Set the default font for all plots
-rcParams['font.family'] = 'Consolas'
+rcParams['font.family'] = 'DejaVu Sans Mono'
 rcParams['font.size'] = 24
 
 # Create the price_plots directory if it doesn't exist
