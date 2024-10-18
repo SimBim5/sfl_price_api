@@ -75,4 +75,4 @@
 
 ![Sunflorians Price](price_plots/sunflorian_emblem_price_plot.png)
 
-![Bumpkin Price](price_plots/Bumpkin_emblem_price_plot.png)
+![Bumpkin Price](price_plots/bumpkin_emblem_price_plot.png)
