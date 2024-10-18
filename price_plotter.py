@@ -26,8 +26,8 @@ rcParams['font.size'] = 24
 if not os.path.exists('price_plots'):
     os.makedirs('price_plots')
 
-# Function to get dominant color from an image
 def get_dominant_color(image_path):
+    print(f"Trying to access image: {image_path}")
     color_thief = ColorThief(image_path)
     dominant_color = color_thief.get_color(quality=1)
     return dominant_color
