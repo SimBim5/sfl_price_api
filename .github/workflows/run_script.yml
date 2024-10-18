@@ -1,4 +1,4 @@
-name: Run Python Script Every 15 Minutes
+name: Run Python Script and Jupyter Notebook Every 15 Minutes
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:  # Allows manual trigger
 
 jobs:
-  run-script:
+  run-scripts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,10 +18,15 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pandas requests
+          pip install pandas requests nbconvert
 
       - name: Run Python script
         run: python price_api.py
+
+      - name: Convert and run Jupyter notebook
+        run: |
+          jupyter nbconvert --to script price_plotter.ipynb
+          python price_plotter.py
 
       - name: Commit and push changes
         env:
@@ -31,4 +36,4 @@ jobs:
           git config --global user.email 'github-actions@github.com'
           git add price_tracking/*.csv
           git commit -m "Update price data"
-          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
