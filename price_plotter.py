@@ -117,7 +117,7 @@ def plot_each_resource_separately():
         
         # Set text color (title, labels, ticks) to match plot color
         ax.title.set_color(dominant_color_normalized)
-        ax.tick_params(colors=dominant_color_normalized)
+        ax.tick_params(colors=dominant_color_normalized, labelsize=24)  # Increase y-tick label size to 16
         
         # Get the opposite color in RGB and normalize it for plotting
         opposite_grid_color = normalize_color(opposite_color(dominant_color))
