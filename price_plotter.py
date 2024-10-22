@@ -95,7 +95,7 @@ def plot_each_resource_separately():
     
     # Loop through each resource and plot its price separately
     for resource in unique_resources:
-        fig, ax = plt.subplots(figsize=(15, 5))  # Increased height for better alignment with image
+        fig, ax = plt.subplots(figsize=(20, 5))  # Increased height for better alignment with image
         
         # Filter data for the current resource
         resource_data = df[df['Resource'] == resource]
