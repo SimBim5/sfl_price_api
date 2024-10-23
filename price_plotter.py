@@ -28,10 +28,15 @@ if not os.path.exists('price_plots'):
     os.makedirs('price_plots')
 
 def get_dominant_color(image_path):
-    print(f"Trying to access image: {image_path}")
     color_thief = ColorThief(image_path)
-    dominant_color = color_thief.get_color(quality=1)
-    return dominant_color
+    
+    # Get the palette with at least 1 color (the first one)
+    palette = color_thief.get_palette(color_count=2)
+    
+    # Use the first color from the palette (index 0)
+    first_palette_color = palette[2]
+    
+    return first_palette_color
 
 # Function to add image near the plot on the left side with transparency handling
 def add_image_left_side(fig, ax, image_path):
