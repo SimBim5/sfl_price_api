@@ -7,6 +7,7 @@ from PIL import Image
 import numpy as np
 from colorthief import ColorThief
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+import matplotlib.dates as mdates
 
 # Load the CSV data (replace with your actual file path)
 csv_file = 'price_tracking/resource_prices_2024_10.csv'  # Update this path to the location of your CSV
@@ -54,39 +55,9 @@ def add_image_left_side(fig, ax, image_path):
     ax.add_artist(ab)
 
 def opposite_color(rgb):
-    """
-    Calculate the opposite color of the given RGB color.
-    
-    Parameters:
-        rgb (tuple): A tuple of (R, G, B) values where each value is between 0 and 255.
-        
-    Returns:
-        tuple: A tuple of (R, G, B) values representing the opposite color.
-    """
-    return tuple(255 - value for value in rgb)
-
-def opposite_color(rgb):
-    """
-    Calculate the opposite color of the given RGB color (0-255 range).
-    
-    Parameters:
-        rgb (tuple): A tuple of (R, G, B) values where each value is between 0 and 255.
-        
-    Returns:
-        tuple: A tuple of (R, G, B) values representing the opposite color.
-    """
     return tuple(255 - value for value in rgb)
 
 def normalize_color(rgb):
-    """
-    Normalize the RGB color from the range (0-255) to (0-1) for matplotlib.
-    
-    Parameters:
-        rgb (tuple): A tuple of (R, G, B) values where each value is between 0 and 255.
-        
-    Returns:
-        tuple: A tuple of (R, G, B) values normalized to the range (0-1).
-    """
     return tuple(value / 255.0 for value in rgb)
 
 # Create a function to plot each resource separately
@@ -112,23 +83,26 @@ def plot_each_resource_separately():
         # Plot the line using the dominant color
         sns.lineplot(data=resource_data, x='Date', y='P2P (SFL)', linewidth=4, color=dominant_color_normalized, ax=ax)
         
+        # Set the y-limits from the min to the max price
+        #ax.set_ylim(resource_data['P2P (SFL)'].min(), resource_data['P2P (SFL)'].max())
+
         # Set light gray background for the plot area
         ax.set_facecolor('#f0f0f0')  # Light gray background
         
         # Set text color (title, labels, ticks) to match plot color
         ax.title.set_color(dominant_color_normalized)
-        ax.tick_params(colors=dominant_color_normalized, labelsize=24)  # Increase y-tick label size to 16
+        ax.tick_params(colors=dominant_color_normalized, labelsize=24)
         
         # Get the opposite color in RGB and normalize it for plotting
         opposite_grid_color = normalize_color(opposite_color(dominant_color))
 
         # Show the grid explicitly
-        ax.grid(True, color=opposite_grid_color, linewidth=1, linestyle='--')  # Light gray dashed grid
+        ax.grid(True, color=opposite_grid_color, linewidth=1, linestyle='--')
         
-        # Hide x and y labels but keep the grid
-        ax.xaxis.label.set_visible(False)
-        ax.yaxis.label.set_visible(False)
-        
+        # Customize the x-axis date format (date and time without the year)
+        ax.xaxis.set_major_formatter(mdates.DateFormatter('%d %b'))
+        #plt.xticks(rotation=45)  # Rotate the x-axis labels for better readability
+
         # Add the image on the left side
         add_image_left_side(fig, ax, image_path)
         
@@ -143,8 +117,6 @@ def plot_each_resource_separately():
         plt.savefig(plot_filename, bbox_inches='tight', transparent=True)  # Save the figure to file with transparency
         
         plt.close()
-        # Display the plot
-        # plt.show()
 
 # Call the function to plot each resource and save them
 plot_each_resource_separately()
