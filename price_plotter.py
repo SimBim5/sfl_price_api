@@ -103,6 +103,9 @@ def plot_each_resource_separately():
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%d %b'))
         #plt.xticks(rotation=45)  # Rotate the x-axis labels for better readability
 
+        ax.set_xlabel("")
+        ax.set_ylabel("")
+
         # Add the image on the left side
         add_image_left_side(fig, ax, image_path)
         
