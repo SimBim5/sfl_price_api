@@ -9,9 +9,13 @@ from colorthief import ColorThief
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import matplotlib.dates as mdates
 
-# Load the CSV data (replace with your actual file path)
-csv_file = 'price_tracking/resource_prices_2024_10.csv'  # Update this path to the location of your CSV
-df = pd.read_csv(csv_file)
+# Set the directory containing your CSV files
+csv_directory = 'price_tracking'
+
+# Load all CSV files from the specified directory
+all_files = [os.path.join(csv_directory, f) for f in os.listdir(csv_directory) if f.endswith('.csv')]
+df_list = [pd.read_csv(file) for file in all_files]
+df = pd.concat(df_list, ignore_index=True)
 
 # Convert the 'Date' column to datetime
 df['Date'] = pd.to_datetime(df['Date'])
