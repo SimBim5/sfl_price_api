@@ -67,6 +67,18 @@
 
 ![Honey Price](price_plots/honey_price_plot.png)
 
+![Feather Price](price_plots/feather_price_plot.png)
+
+![Milk Price](price_plots/milk_price_plot.png)
+
+![Leather Price](price_plots/leather_price_plot.png)
+
+![Wool Price](price_plots/wool_price_plot.png)
+
+![Merino Wool Price](price_plots/merino_wool_price_plot.png)
+
+
+
 # EMBLEMS ⚜️⚜️⚜️
 
 ![Goblin Price](price_plots/goblin_emblem_price_plot.png)
