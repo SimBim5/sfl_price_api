@@ -28,6 +28,9 @@
 
 ![Kale Price](price_plots/kale_price_plot.png)
 
+![Barley Price](price_plots/barley_price_plot.png)
+
+
 # FRUITS 🍊🍊🍊
 
 ![Tomato Price](price_plots/tomato_price_plot.png)
